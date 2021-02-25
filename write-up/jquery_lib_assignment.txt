@@ -1,0 +1,49 @@
+---------------------------------------- jquery lib ----------------------------------------
+What to focus on (overview requirements):
+	[]_ CDNs 
+	[]_ jquery selectors, attributes and content
+	[]_ manipulation DOM (if you do not understand what DOM is, READ WHAT DOM MEANS FIRST)
+	[]_ event handling
+	[]_ AJAX and asynchronous calls
+
+
+Resources:
+	https://api.jquery.com/ (recommended)
+	https://www.w3schools.com/jquery/
+	https://www.tutorialspoint.com/jquery/index.htm
+	https://medium.com/@hossam.hilal0/ajax-jquery-ajax-tutorial-fdf35766ba7b
+	
+What you need to do (FOLLOW the below order):
+	[]_ First: re-read above "overview requirements" to get familar with main topics AND have a look at the wire-frame.
+	[]_ Second: make use of resources to understand concepts and implimnation 
+	[]_ Third: create a new repo. on Github with name "core" (add me on that repo with admin privilage for feedback)
+		[]_ clone empty repo. on local and create a folder with name "client_app"
+		[]_ inside "client_app" dir, create a "index.js" and "index.html"
+			[]_ open "index.html": create a an empty html doc and close document.
+			[]_ open "index.html": create the following:
+				[]_ build a method that constructs a table with variable columns ONLY using "jquery" (for example, 3 cols, 5 cols, etc...)
+					[]_ Layout: table layout - the table should be injected in the first column.
+					[]_ method should render message "No data" if data does not exist or no records.
+					[]_ rows must be select-able (it will be used for "edit" and "delete" functionality)
+				[]_ build a form with the below attributes ONLY using "jquery" (for practice).
+					[]_ Attributes: ["name:string","age:number","gendor:boolean","email:string","feedback:string"]
+					[]_ Layout: stack layout - zero column index
+					[]_ validate form (remember "modular" design very important)
+					[]_ test your validation
+					[]_ add 3 buttons "add", "edit", "delete" buttons.
+						[]_ for now: keep the buttons empty block, just declare handlers.
+		[]_ change to root dir of repo and create "back_end" folder.
+		[]_ inside "back_end" folder, create a flask app with the following details (similar to tutorial you did)
+			[]_models.py with form Attributes: ["name:string","age:number","gendor:boolean","email:string","feedback:string"]
+			[]_index.py with [GET, POST, DELETE, PATCH/PUT] HTTP routes.
+	[]_once above is done, switch back to "client_app" and use AJAX to make api calls
+		[]_ consuming [GET, POST, DELETE, PATCH/PUT] HTTP routes
+		[]_ make use of AJAX in the event handlers that you prevously declared empty.
+	[]_DONE!
+		
+	
+	
+				
+					
+
+
