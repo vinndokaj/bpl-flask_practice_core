@@ -74,12 +74,12 @@ class FeedbackModel:
         return self.list_items()
 
     def list_items(self):
-        query = f'SELECT id, Name, Age, Gender, Email, Feedback ' \
+        query = f'SELECT id, Name, Email, Age, Gender, Feedback ' \
                 f'FROM feedback;'
         cur = self.conn.cursor()
         result_set = cur.execute(query).fetchall()
         result = [{column: row[i]
                   for i, column in enumerate(result_set[0].keys())}
                   for row in result_set]
-        # print(result)
+        #print(result)
         return result

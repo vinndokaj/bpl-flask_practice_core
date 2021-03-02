@@ -5,6 +5,7 @@ from models import Schema, FeedbackModel
 
 
 app = Flask(__name__)
+app.config['JSON_SORT_KEYS'] = False
 CORS(app, allow_headers='Content-Type')
 
 @app.route('/')
