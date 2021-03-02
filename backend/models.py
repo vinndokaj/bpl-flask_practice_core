@@ -32,21 +32,21 @@ class FeedbackModel:
         self.conn.close()
 
     def create(self, params):
+        p = (params['Name'], params['Age'], params['Gender'], params['Email'], params['Feedback'])
         query = f'INSERT INTO feedback ' \
                 f'(Name, Age, Gender, Email, Feedback)' \
-                f'values ("{params.get("Name")}", "{params.get("Age")}",' \
-                f' "{params.get("Gender")}", "{params.get("Email")}", "{params.get("Feedback")}");'
+                f'values (?,?,?,?,?);'
         cur = self.conn.cursor()
-        result = cur.execute(query)
+        result = cur.execute(query, p)
         print(result)
         print(query)
         return self.list_items()
 
     def delete(self, id):
         query = f'DELETE FROM feedback ' \
-                f'WHERE id = {id};'
+                f'WHERE id = ?;'
         cur = self.conn.cursor()
-        result = cur.execute(query)
+        result = cur.execute(query, id)
         print(query)
         return self.list_items()
 
@@ -81,5 +81,5 @@ class FeedbackModel:
         result = [{column: row[i]
                   for i, column in enumerate(result_set[0].keys())}
                   for row in result_set]
-        print(result)
+        # print(result)
         return result
