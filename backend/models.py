@@ -38,8 +38,8 @@ class FeedbackModel:
                 f'values (?,?,?,?,?);'
         cur = self.conn.cursor()
         result = cur.execute(query, p)
-        print(result)
-        print(query)
+        # print(result)
+        # print(query)
         return self.list_items()
 
     def delete(self, id):
@@ -47,19 +47,10 @@ class FeedbackModel:
                 f'WHERE id = ?;'
         cur = self.conn.cursor()
         result = cur.execute(query, id)
-        print(query)
+        # print(query)
         return self.list_items()
 
     def update(self, params):
-        #query does not work with python parameters passed in, had to convert to sql params
-        #query = f'UPDATE feedback ' \
-        #        f'SET Name = {params.get("Name")}, ' \
-        #        f'Age = {params.get("Age")}, ' \
-        #        f'Gender = {params.get("Gender")}, ' \
-        #        f'Email = {params.get("Email")}, ' \
-        #        f'Feedback = {params.get("Feedback")} ' \
-        #        f'WHERE id = {params.get("id")};'
-        
         p = (params['Name'], params['Age'], params['Gender'], params['Email'], params['Feedback'], params['id'])
         query = f'UPDATE feedback ' \
                 f'SET Name = ?, ' \
@@ -68,7 +59,7 @@ class FeedbackModel:
                 f'Email = ?, ' \
                 f'Feedback = ? ' \
                 f'WHERE id = ?;'  
-        print(query)
+        # print(query)
         cur = self.conn.cursor()
         cur.execute(query, p)
         return self.list_items()
@@ -81,5 +72,5 @@ class FeedbackModel:
         result = [{column: row[i]
                   for i, column in enumerate(result_set[0].keys())}
                   for row in result_set]
-        #print(result)
+        # print(result)
         return result
