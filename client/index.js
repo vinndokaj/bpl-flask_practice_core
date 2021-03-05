@@ -55,7 +55,7 @@ function buildPage(){
 
     $('#data-card')
         .append('<table class="table"><thead><tr></tr></thead><tbody></tbody></table>')
-}
+} //end buildPage
 
 //listener events for table rows
 function addEventListeners() {
@@ -81,8 +81,9 @@ function addEventListeners() {
             loadSelectedData(this)
         }
     }, "tbody tr");
-} 
+}  //end addEventListeners
 
+//ajax call to server then call populateTable
 function getTableData(){
     //get data from flask server and use it to populate table data
     $.get(`${URL_PATH}/list`, function(data) {
@@ -93,7 +94,7 @@ function getTableData(){
         }
     }, "json")
     .fail(function() {alert( "error with ajax get")})
-}
+} //end getTableData
 
 //populate table using parsed JSON array 
 function populateTable(data){
@@ -188,7 +189,7 @@ function deleteSelected() {
     })    
 } //end deleteSelected
 
-//TODO error notifications
+//validate form returns boolean
 function validateForm() {
     let flag = true;
     let field_errors = []
@@ -208,6 +209,7 @@ function validateForm() {
     return flag
 } //end validateForm
 
+//load all selected data on double click
 function loadSelectedData(row){
     let rowData = $(row)[0].cells
     for(let i=0; i < rowData.length; i++){
@@ -219,7 +221,7 @@ function loadSelectedData(row){
             $(`#${rowData[i].className}`).val(rowData[i].innerText)
         }
     }
-}
+} //end loadSelectedData
 
 //auxilary function to validate specific fields of data
 //atm only checks for empty inputs and invalid email
@@ -242,4 +244,4 @@ function getFormData(){
     console.log(formData)
 
     return formData
-}
+} //end getFormData
