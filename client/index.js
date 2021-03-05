@@ -37,11 +37,10 @@ function buildPage(){
     //instatiate form fields
     for(const key in FORM_FIELDS){
         if(FORM_FIELDS[key].type == 'select'){
-            $("form").append(`<div class="form-group"> <label for="${key}">${key}:</label> <select class="form-control" name="${key}" id="${key}">`)
+            $("form").append(`<div class="form-group"> <label for="${key}">${key}:</label> <select class="form-control" name="${key}" id="${key}"><option value="">-- Select --</option></select></div>`)
             for(let i=0; i < FORM_FIELDS[key].options.length; i++) {
                 $("form select:last-of-type").append(`<option value="${FORM_FIELDS[key].options[i].value}">${FORM_FIELDS[key].options[i].name}</option>`)
             }
-            $("form").append('</select></div>')
         } else {
             $('form').append(`<div class="form-group"><label for="${key}">${key}:</label> <input type="${FORM_FIELDS[key].type}" class="form-control" name="${key}" id="${key}"></div>`)
         }
@@ -77,7 +76,9 @@ function addEventListeners() {
             } else {
                 $(this).toggleClass('selected');
             }
-
+        },
+        dblclick: function() {
+            loadSelectedData(this)
         }
     }, "tbody tr");
 } 
@@ -110,15 +111,14 @@ function populateTable(data){
         $('tbody').append(`<tr id="row-${data[i].id}">`)
         for(const key in obj){
             //convert boolean to Male/Female if key gender
-            if(key == "Gender") {console.log(obj[key])}
             let value = (key == "Gender") ? (obj[key] ? "Female" : "Male") : obj[key]
 
             //if first element (id) make id bold 
             if(first){
-                $(`#row-${data[i].id}`).append(`<th scope="row">${value}</th>`)
+                $(`#row-${data[i].id}`).append(`<th scope="row" class=${key}>${value}</th>`)
                 first=false;
             } else {
-                $(`#row-${data[i].id}`).append(`<td>${value}</td>`)
+                $(`#row-${data[i].id}`).append(`<td class=${key}>${value}</td>`)
             }
         }
         $(`tbody`).append('</tr>')
@@ -207,6 +207,19 @@ function validateForm() {
 
     return flag
 } //end validateForm
+
+function loadSelectedData(row){
+    let rowData = $(row)[0].cells
+    for(let i=0; i < rowData.length; i++){
+        if(rowData[i].className == "Gender"){
+            let boolGender = (rowData[i].innerText == "Female") ? 1 : 0
+            $(`#${rowData[i].className}`).val(boolGender)
+
+        }else{
+            $(`#${rowData[i].className}`).val(rowData[i].innerText)
+        }
+    }
+}
 
 //auxilary function to validate specific fields of data
 //atm only checks for empty inputs and invalid email
